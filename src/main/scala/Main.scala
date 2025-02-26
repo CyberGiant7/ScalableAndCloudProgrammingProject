@@ -23,7 +23,7 @@ object Main {
     val numExecutors = sc.getConf.get("spark.executor.instances", "unknown")
     val numCores = sc.getConf.get("spark.executor.cores", "unknown")
     val executorMemory = sc.getConf.get("spark.executor.memory", "unknown")
-    val partitionNumber = (numExecutors.toInt * numCores.toInt * 3).toInt
+    val partitionNumber = (numExecutors.toInt * numCores.toInt * 2).toInt
 
     println(s"💻 Cluster info: Executors: $numExecutors | Cores per Executor: $numCores | Executor Memory: $executorMemory")
 
