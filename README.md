@@ -17,7 +17,7 @@ Before you begin, ensure you have the following:
    Replace `your-cluster-name` and `your-region` with your desired cluster name and region.
 
    ```sh
-   gcloud dataproc clusters create your-cluster-name --region=your-region --num-workers=2 --master-boot-disk-size=240 --worker-boot-disk-size=240
+   gcloud dataproc clusters create your-cluster-name --region=your-region --num-workers=4 --master-boot-disk-size=240 --worker-boot-disk-size=240
    ```
 
 2. **Create a Google Cloud Storage Bucket**
@@ -36,15 +36,24 @@ Before you begin, ensure you have the following:
    sbt package
    ```
 
-4. **Submit the Spark Job**
+4. **Upload the package to the bucket**
 
-   Replace `your-cluster-name`, `your-region`, and `your-bucket-name` with your cluster name, region, and bucket name respectively.
+   Replace `your-bucket-name` with your desired bucket name.
 
+   ```ssh
+   gcloud storage cp target/scala-2.12/scalableproject_2.12-0.1.jar gs://your-bucket-name
+   ```
+   
+
+5. **Create a output folder inside the Storage Bucket**
+   
+   Replace `your-bucket-name` with your desired bucket name
+   
    ```sh
-   gcloud dataproc jobs submit spark --cluster=your-cluster-name --region=your-region --jar=gs://your-bucket-name/scalableproject_2.12-0.1.jar -- gs://your-bucket-name/
+   gcloud storage folders create --recursive gs://your-bucket-name/output
    ```
 
-5. **Submit the Spark Job with Custom Properties**
+6. **Submit the Spark Job with Custom Properties**
 
    Replace `your-cluster-name`, `your-region`, and `your-bucket-name` with your cluster name, region, and bucket name respectively.
 
