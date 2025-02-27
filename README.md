@@ -60,6 +60,14 @@ Before you begin, ensure you have the following:
    ```sh
    gcloud dataproc jobs submit spark --cluster=your-cluster-name --region=your-region --properties=spark.executor.instances=1,spark.executor.cores=4 --jar=gs://your-bucket-name/scalableproject_2.12-0.1.jar -- gs://your-bucket-name/
    ```
+7. **Download the result file**
+  
+   To download the result file run these commands replacing `your-bucket-name` with your desired bucket name
+
+   ```ssh
+   gcloud storage cp gs://your-bucket-name/output/co_purchase_analysis_single.csv .
+   gcloud storage cp gs://your-bucket-name/output/metrics.txt .
+   ```
 
 ## Project Structure
 
